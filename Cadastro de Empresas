@@ -1,0 +1,74 @@
+# Lista de estados
+estados = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO']
+
+# Lista de cidades
+cidades = {
+    'AC': ['Rio Branco', 'Cruzeiro do Sul'],
+    'AL': ['Maceio', 'Arapiraca'],
+    'AP': ['Macapa', 'Santana'],
+    'AM': ['Manaus', 'Parintins'],
+    'BA': ['Salvador', 'Feira de Santana'],
+    'CE': ['Fortaleza', 'Caucaia'],
+    'DF': ['Brasilia', 'Taguatinga'],
+    'ES': ['Vitoria', 'Vila Velha'],
+    'GO': ['Goiania', 'Aparecida de Goiania'],
+    'MA': ['Sao Luis', 'Imperatriz'],
+    'MT': ['Cuiaba', 'Varzea Grande'],
+    'MS': ['Campo Grande', 'Dourados'],
+    'MG': ['Belo Horizonte', 'Uberlandia'],
+    'PA': ['Belem', 'Ananindeua'],
+    'PB': ['Joao Pessoa', 'Campina Grande'],
+    'PR': ['Curitiba', 'Londrina'],
+    'PE': ['Recife', 'Jaboatao dos Guararapes'],
+    'PI': ['Teresina', 'Parnaiba'],
+    'RJ': ['Rio de Janeiro', 'Sao Goncalo'],
+    'RN': ['Natal', 'Mossoro'],
+    'RS': ['Porto Alegre', 'Caxias do Sul'],
+    'RO': ['Porto Velho', 'Ji-Parana'],
+    'RR': ['Boa Vista', 'Rorainopolis'],
+    'SC': ['Florianopolis', 'Joinville'],
+    'SP': ['Sao Paulo', 'Guarulhos'],
+    'SE': ['Aracaju', 'Nossa Senhora do Socorro'],
+    'TO': ['Palmas', 'Araguaina']
+}
+
+# Lista de empresas
+empresas = []
+
+while True:
+    empresa = input('Digite o nome da empresa: ')
+    if empresa == '$':
+        break
+    elif empresa == '':
+        print('O nome da empresa nao pode ser vazio.')
+        continue
+
+    uf = input('Digite a UF: ')
+    if uf not in estados:
+        print('UF nao existe.')
+        continue
+
+    cidade = input('Digite a cidade: ')
+    if cidade not in cidades[uf]:
+        print('Cidade nao esta dentro da UF digitada.')
+        continue
+
+    endereco = input('Digite o endereco: ')
+
+    # Adiciona a empresa na lista
+    empresas.append({
+        'Empresa': empresa,
+        'Endereco': endereco,
+        'UF': uf,
+        'Cidade': cidade
+    })
+
+# Escreve as empresas em um arquivo TXT
+with open('empresas.txt', 'w') as f:
+    f.write('Empresa;Endereco;UF;Cidade\n')
+    for empresa in empresas:
+        f.write(f"{empresa['Empresa']};{empresa['Endereco']};{empresa['UF']};{empresa['Cidade']}\n")
+
+# Lista as empresas cadastradas
+for empresa in empresas:
+    print(f"Empresa: {empresa['Empresa']}, Endereco: {empresa['Endereco']}")
